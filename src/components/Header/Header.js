@@ -1,4 +1,7 @@
 import React from 'react';
+import {
+  Link
+} from "react-router-dom";
 import { Navbar, Nav, Form, FormControl, Button, InputGroup,  } from 'react-bootstrap';
 import Logo from '../../images/logo2.png';
 import './Header.css';
@@ -16,8 +19,8 @@ const Header = () => {
           <Nav.Link href="#home">
             <FontAwesomeIcon icon={faShoppingCart} />
           </Nav.Link>
-          <Nav.Link href="#features" className="btn my-btn btn-outline-danger">Login</Nav.Link>
-          <Nav.Link href="#pricing" className="btn my-btn btn-outline-danger">Sign up</Nav.Link>
+          <Link to="/login" className="btn my-btn btn-outline-danger">Login</Link>
+          <Link to="/signup" className="btn my-btn btn-outline-danger">Sign up</Link>
         </Nav>
         
       </Navbar>
