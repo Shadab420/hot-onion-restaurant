@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Form, Row, Col, Button, Container } from 'react-bootstrap';
 import Auth from './useAuth';
 
 const Login = () => {
@@ -38,7 +38,9 @@ const Login = () => {
         <div>
             <h3>Login</h3>
             <hr/><br/>
-            <Button onClick={handleSignInWithGoogle}> Signup with Google </Button> <br/>
+            <Button onClick={handleSignInWithGoogle}> Sign-in with Google </Button> <br/><br/><br/>
+            <h4>Or</h4> <br/><br/>
+            <Container>
             <Form>
                 <Form.Group as={Row} controlId="formHorizontalEmail">
                     <Form.Label column sm={2}>
@@ -65,6 +67,7 @@ const Login = () => {
                         </Col>
                     </Form.Group>
             </Form>
+            </Container>
         </div>
     );
 };

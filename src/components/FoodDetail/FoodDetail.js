@@ -6,11 +6,14 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
 const FoodDetail = (props) => {
 
-    const { name, longDescription, price, imgUrl } = props.food
+    const { name, longDescription, price, imgName, category } = props.food
     const [quantityCount, setQuantityCount] = useState(1);
     const [currentItemTotalPrice, setCurrentItemTotalPrice] = useState(price);
 
-   
+    //dynamically show images
+    const images = require.context('../../images', true);
+    const imagePath = images(`./${category.toLowerCase()}/${imgName}`)
+
     const handleMinusClick = () => {
         if(quantityCount > 1){
             
@@ -47,7 +50,7 @@ const FoodDetail = (props) => {
                 </Col>
 
                 <Col md={6}>
-                    <img src={imgUrl} alt="Food image"/>
+                    <img src={imagePath} alt="Food image" className="food-image"/>
                 </Col>
             </Row>
             

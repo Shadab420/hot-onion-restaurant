@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Form, Row, Col, Button, Container } from 'react-bootstrap';
 import Auth from '../Login/useAuth';
 
 const Signup = () => {
@@ -22,6 +22,13 @@ const Signup = () => {
        
     }
 
+    const handleSignInWithGoogle = () => {
+        auth.signInWithGoogle()
+            .then(res => {
+                window.location.pathname = '/';
+            })
+    }
+
     const handleChange = e => {
         e.preventDefault();
         if(e.target.name === "email") setEmail(e.target.value)
@@ -30,8 +37,12 @@ const Signup = () => {
 
     return (
         <div>
-            <h3>Login</h3>
+            <h3>Sign up</h3>
             <hr/>
+            <br/><br/>
+            <Button onClick={handleSignInWithGoogle}> Sign-in with Google </Button> <br/><br/><br/>
+            <h4>Or</h4> <br/><br/>
+            <Container>
 
             <Form>
                 <Form.Group as={Row} controlId="formHorizontalEmail">
@@ -59,6 +70,7 @@ const Signup = () => {
                         </Col>
                     </Form.Group>
             </Form>
+            </Container>
         </div>
     );
 };

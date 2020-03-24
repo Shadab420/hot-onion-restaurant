@@ -13,3 +13,8 @@
 .quantity-plus-btn, .quantity-minus-btn{
     border-radius: 50px;
 }
+
+.food-image{
+    height: 500px;
+    width: 500px;
+}

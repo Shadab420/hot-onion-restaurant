@@ -35,8 +35,8 @@ const Header = () => {
           {
             auth.user?
             <span>
-              <p>{auth.user.email}</p>
-            <Button variant="danger" onClick={handleSignOut}>Signout</Button>
+                <small className="current-username">{auth.user.email}</small>
+                <Button variant="danger" className="my-btn" onClick={handleSignOut}>Signout</Button>
             </span>
             : <div>
             <Link to="/login" className="btn my-btn btn-outline-danger">Login</Link>

@@ -5,7 +5,7 @@ export default  [
         shortDescription: 'How we dream about our future',
         longDescription: 'How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future',
         price: 23.99,
-        imgUrl: '',
+        imgName: 'lunch1.png',
         category: 'Lunch'
     },
     {
@@ -14,7 +14,7 @@ export default  [
         shortDescription: 'How we dream about our future',
         longDescription: 'How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future',
         price: 9.99,
-        imgUrl: '',
+        imgName: 'lunch2.png',
         category: 'Lunch'
     },
     {
@@ -23,7 +23,7 @@ export default  [
         shortDescription: 'How we dream about our future',
         longDescription: 'How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future',
         price: 6.99,
-        imgUrl: '',
+        imgName: 'lunch3.png',
         category: 'Lunch'
     },
     {
@@ -32,7 +32,7 @@ export default  [
         shortDescription: 'How we dream about our future',
         longDescription: 'How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future',
         price: 8.99,
-        imgUrl: '',
+        imgName: 'lunch4.png',
         category: 'Lunch'
     },
     {
@@ -41,7 +41,7 @@ export default  [
         shortDescription: 'How we dream about our future',
         longDescription: 'How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future',
         price: 15.99,
-        imgUrl: '',
+        imgName: 'lunch5.png',
         category: 'Lunch'
     },
     {
@@ -50,7 +50,7 @@ export default  [
         shortDescription: 'How we dream about our future',
         longDescription: 'How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future',
         price: 7.99,
-        imgUrl: '',
+        imgName: 'lunch6.png',
         category: 'Lunch'
     },
     {
@@ -59,7 +59,7 @@ export default  [
         shortDescription: 'How we dream about our future',
         longDescription: 'How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future',
         price: 6.99,
-        imgUrl: '',
+        imgName: 'breakfast1.png',
         category: 'Breakfast'
     },
     {
@@ -68,7 +68,7 @@ export default  [
         shortDescription: 'How we dream about our future',
         longDescription: 'How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future',
         price: 9.99,
-        imgUrl: '',
+        imgName: 'breakfast2.png',
         category: 'Breakfast'
     },
     {
@@ -77,7 +77,7 @@ export default  [
         shortDescription: 'How we dream about our future',
         longDescription: 'How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future',
         price: 10.99,
-        imgUrl: '',
+        imgName: 'breakfast3.png',
         category: 'Breakfast'
     },
     {
@@ -86,7 +86,7 @@ export default  [
         shortDescription: 'How we dream about our future',
         longDescription: 'How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future',
         price: 8.99,
-        imgUrl: '',
+        imgName: 'breakfast4.png',
         category: 'Breakfast'
     },
     {
@@ -95,7 +95,7 @@ export default  [
         shortDescription: 'How we dream about our future',
         longDescription: 'How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future',
         price: 19.99,
-        imgUrl: '',
+        imgName: 'breakfast5.png',
         category: 'Breakfast'
     },
     {
@@ -104,7 +104,7 @@ export default  [
         shortDescription: 'How we dream about our future',
         longDescription: 'How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future',
         price: 3.99,
-        imgUrl: '',
+        imgName: 'breakfast6.png',
         category: 'Breakfast'
     },
     {
@@ -113,7 +113,7 @@ export default  [
         shortDescription: 'How we dream about our future',
         longDescription: 'How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future',
         price: 9.99,
-        imgUrl: '',
+        imgName: 'dinner1.png',
         category: 'Dinner'
     },
     {
@@ -122,7 +122,7 @@ export default  [
         shortDescription: 'How we dream about our future',
         longDescription: 'How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future',
         price: 10.99,
-        imgUrl: '',
+        imgName: 'dinner2.png',
         category: 'Dinner'
     },
     {
@@ -131,7 +131,7 @@ export default  [
         shortDescription: 'How we dream about our future',
         longDescription: 'How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future',
         price: 12.99,
-        imgUrl: '',
+        imgName: 'dinner3.png',
         category: 'Dinner'
     },
     {
@@ -140,7 +140,7 @@ export default  [
         shortDescription: 'How we dream about our future',
         longDescription: 'How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future',
         price: 8.99,
-        imgUrl: '',
+        imgName: 'dinner4.png',
         category: 'Dinner'
     },
     {
@@ -149,7 +149,7 @@ export default  [
         shortDescription: 'How we dream about our future',
         longDescription: 'How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future',
         price: 6.99,
-        imgUrl: '',
+        imgName: 'dinner5.png',
         category: 'Dinner'
     },
     {
@@ -158,7 +158,7 @@ export default  [
         shortDescription: 'How we dream about our future',
         longDescription: 'How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future. How we dream about our future',
         price: 9.99,
-        imgUrl: '',
+        imgName: 'dinner6.png',
         category: 'Dinner'
     }
 ]

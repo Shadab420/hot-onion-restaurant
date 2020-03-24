@@ -3,11 +3,16 @@ import { Row, Container, Col } from 'react-bootstrap';
 import './CartItem.css'
 
 const CartItem = (props) => {
-    const {name, price, imgurl, quantity} = props.item;
+    const {name, price, imgName, quantity, category} = props.item;
 
     const [quantityCount, setQuantityCount] = useState(quantity);
     const [currentItemTotalPrice, setCurrentItemTotalPrice] = useState(price);
     const singlePrice = props.singlePrice;
+
+    //dynamically show images
+    const images = require.context('../../images', true);
+    const imagePath = images(`./${category.toLowerCase()}/${imgName}`)
+    
    
     const handleMinusClick = () => {
         if(quantityCount > 1){
@@ -46,7 +51,7 @@ const CartItem = (props) => {
             
                 <Row>
                     <Col md={4}>
-                        <img src="" alt="thumbnail"/>
+                        <img src={imagePath} className="img-thumbnail" alt="thumbnail"/>
                     </Col>
 
                     <Col md={4}>
