@@ -7,21 +7,43 @@ import Logo from '../../images/logo2.png';
 import './Header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { useAuth } from '../Login/useAuth';
 
 const Header = () => {
+
+  //get auth hook
+  const auth = useAuth();
+
+  const handleSignOut = () => {
+    auth.signOut()
+        .then(res => {
+            window.location.pathname = '/';
+        })
+  }
+
   return (
     <div>
       <Navbar bg="light" variant="light">
-      <Navbar.Brand href="#home" className="mr-auto">
+      <Navbar.Brand href="/" className="mr-auto">
         <img src={Logo} className="logo ml-5"/>
       </Navbar.Brand>
         <Nav className="mr-5">
           <Nav.Link href="#home">
             <FontAwesomeIcon icon={faShoppingCart} />
           </Nav.Link>
-          <Link to="/login" className="btn my-btn btn-outline-danger">Login</Link>
-          <Link to="/signup" className="btn my-btn btn-outline-danger">Sign up</Link>
-        </Nav>
+          <Link to="/menu" className="btn my-btn btn-outline-danger">Foods</Link>
+          {
+            auth.user?
+            <span>
+              <p>{auth.user.email}</p>
+            <Button variant="danger" onClick={handleSignOut}>Signout</Button>
+            </span>
+            : <div>
+            <Link to="/login" className="btn my-btn btn-outline-danger">Login</Link>
+            <Link to="/signup" className="btn my-btn btn-outline-danger">Sign up</Link>
+            </div>
+          }
+          </Nav>
         
       </Navbar>
 

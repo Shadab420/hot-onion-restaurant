@@ -10,20 +10,13 @@ const FoodDetail = (props) => {
     const [quantityCount, setQuantityCount] = useState(1);
     const [currentItemTotalPrice, setCurrentItemTotalPrice] = useState(price);
 
-    // const item = {
-    //     ...props.food,
-    //     price,
-    //     quantity: 1
-    // }
+   
     const handleMinusClick = () => {
         if(quantityCount > 1){
             
             setQuantityCount(quantityCount-1);
             const totPrice = currentItemTotalPrice - price;
             setCurrentItemTotalPrice(totPrice);
-
-            // item.price = totPrice;
-            // item.quantity = quantityCount-1;
             
         }
     }
@@ -33,9 +26,6 @@ const FoodDetail = (props) => {
             setQuantityCount(quantityCount+1);
             const totPrice = currentItemTotalPrice + price;
             setCurrentItemTotalPrice(totPrice);
-
-            // item.price = totPrice;
-            // item.quantity = quantityCount+1;
         } 
     }
 

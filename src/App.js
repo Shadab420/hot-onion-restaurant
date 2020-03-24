@@ -11,11 +11,14 @@ import Header from './components/Header/Header';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import FoodMenu from './components/FoodMenu/FoodMenu';
-
+import Delivery from './components/Delivery/Delivery';
+import PlaceOrder from './components/PlaceOrder/PlaceOrder';
+import { AuthContextProvider, PrivateRoute  } from './components/Login/useAuth';
 
 
 function App() {
   return (
+    <AuthContextProvider>
     <div className="App">
       <Router>
         <Header></Header>
@@ -32,6 +35,12 @@ function App() {
           <Route path="/signup">
             <Signup />
           </Route>
+          <PrivateRoute path="/delivery">
+            <Delivery />
+          </PrivateRoute>
+          <PrivateRoute path="/place-order">
+            <PlaceOrder />
+          </PrivateRoute>
           <Route path="/">
             <FoodMenu />
           </Route>
@@ -39,6 +48,7 @@ function App() {
         </Switch>
       </Router>
     </div>
+    </AuthContextProvider>
   );
 }
 
