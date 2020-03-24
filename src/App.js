@@ -13,7 +13,9 @@ import Signup from './components/Signup/Signup';
 import FoodMenu from './components/FoodMenu/FoodMenu';
 import Delivery from './components/Delivery/Delivery';
 import PlaceOrder from './components/PlaceOrder/PlaceOrder';
-import { AuthContextProvider, PrivateRoute  } from './components/Login/useAuth';
+import Auth, { AuthContextProvider, PrivateRoute  } from './components/Login/useAuth';
+import { auth } from 'firebase';
+import NoMatch from './components/NoMatch/NoMatch';
 
 
 function App() {
@@ -35,16 +37,18 @@ function App() {
           <Route path="/signup">
             <Signup />
           </Route>
-          <PrivateRoute path="/delivery">
+          <Route path="/delivery">
             <Delivery />
-          </PrivateRoute>
-          <PrivateRoute path="/place-order">
+          </Route>
+          <PrivateRoute path="/orderplaced">
             <PlaceOrder />
           </PrivateRoute>
           <Route path="/">
             <FoodMenu />
           </Route>
-
+          <Route path="*">
+              <NoMatch></NoMatch>
+            </Route>
         </Switch>
       </Router>
     </div>

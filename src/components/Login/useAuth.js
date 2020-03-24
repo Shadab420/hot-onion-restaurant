@@ -26,12 +26,14 @@ export const useAuth = () => useContext(AuthContext);
 export const PrivateRoute = ({ children, ...rest }) => {
   
     const auth = useAuth();
+    const authUser = localStorage.getItem("hot-onion-user");
 
+  if(auth.user) console.log(auth.user.email)
     return (
     <Route
       {...rest}
       render={({ location }) =>
-        auth.user ? (
+        authUser ? (
           children
         ) : (
           <Redirect
@@ -66,6 +68,7 @@ const Auth = () => {
 
                 const signedInUser = getUser(res.user);
                 setUser(signedInUser);
+                localStorage.setItem("hot-onion-user", true);
                 return res.user;
             })
             .catch(err=>{
@@ -82,6 +85,7 @@ const Auth = () => {
 
                 const signedInUser = getUser(res.user);
                 setUser(signedInUser);
+                localStorage.setItem("hot-onion-user", true);
                 return res.user;
             })
             .catch(err=>{
@@ -97,6 +101,7 @@ const Auth = () => {
 
                 const signedInUser = getUser(res.user);
                 setUser(signedInUser);
+                localStorage.setItem("hot-onion-user", true);
                 return res.user;
             })
             .catch(err=>{
@@ -109,6 +114,7 @@ const Auth = () => {
     const signOut = () => {
         return firebase.auth().signOut().then(function() {
             console.log("signed out success")
+            localStorage.removeItem("hot-onion-user");
             setUser(null);
           })
           .catch(function(error) {

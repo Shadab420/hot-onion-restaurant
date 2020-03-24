@@ -62,7 +62,6 @@ const FoodMenu = () => {
         else {
             setDeliveryInfoSubmit(true);
             setDeliveryInformation(deliveryInfo);
-            console.log(deliveryInfo)
         }
     }
 
@@ -142,7 +141,7 @@ const FoodMenu = () => {
                             }
 
                             {
-                                deliveryInfoSubmit && <a href="/place-order" className="btn btn-outline-danger">Place Order</a>
+                                deliveryInfoSubmit && <a href="/orderplaced" className="btn btn-outline-danger">Place Order</a>
                             }
                             {
                                 !deliveryInfoSubmit && <Button disabled> Place Order </Button>
