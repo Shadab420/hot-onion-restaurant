@@ -29,23 +29,16 @@ const FoodMenu = () => {
     
 // load data
     useEffect(()=>{
-        fetch('http://localhost:5000/foods')
+        fetch('https://red-onion-back.herokuapp.com/foods')
         .then(res => res.json())
         .then(data => {
             setAllItems(data)
             const currentCart = JSON. parse(localStorage.getItem('foodCart') || "[]");
             
-            if(currentCart) setCart(currentCart);
-
-             console.log(currentCart)
-           
+            if(currentCart) setCart(currentCart);           
         })
         
         .catch(err => console.log(err));
-        
-        // if(allItems.length){
-            
-        // }
         
     }, [])
 
@@ -70,7 +63,6 @@ const FoodMenu = () => {
             const index = cart.indexOf(selectedItem);
             const newCart = [...cart];
             newCart[index] = item;
-            console.log(newCart)
             localStorage.setItem('foodCart', JSON.stringify(newCart))
 
             setCart(newCart);
@@ -113,7 +105,7 @@ const FoodMenu = () => {
             payment: payment
         }
 
-        fetch('http://localhost:5000/placeOrder', {
+        fetch('https://red-onion-back.herokuapp.com/placeOrder', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -123,10 +115,12 @@ const FoodMenu = () => {
         .then(res => res.json())
         .then(order => {
 
-            setOrderId(order._id)
+            setOrderId(order._id);
+            alert("Order Successful!");
             localStorage.removeItem('foodCart');
             setCart(null);
         })
+        .catch(err => console.log(err.message))
      }
 
     // const checkoutBtnMarkup = (cart === null) ? (
