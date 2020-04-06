@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import { Form, Row, Col, Button, Container } from 'react-bootstrap';
 import Auth from './useAuth';
 
-const Login = () => {
+const Login = (props) => {
     const auth = Auth();
 
     let [email, setEmail] = useState('');
     let [password, setPassword] = useState('');
-    
+    const goToPath = '/';
 
     const handleSignIn = () => {
         auth.signInWithPassword(email, password)
             .then(res => {
-                window.location.pathname = '/';
+                window.location.pathname = goToPath;
                 console.log(res.user)
             })
             .catch(err=>{
@@ -24,7 +24,7 @@ const Login = () => {
     const handleSignInWithGoogle = () => {
         auth.signInWithGoogle()
             .then(res => {
-                window.location.pathname = '/';
+                window.location.pathname = goToPath;
             })
     }
 

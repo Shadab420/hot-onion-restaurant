@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Nav, Row, Col, Container, Button } from 'react-bootstrap';
-import fakeData from '../../fakeData/fakeData';
+import { Nav, Row, Col, Container, Button, Alert } from 'react-bootstrap';
 import Food from '../Food/Food';
 import './FoodMenu.css';
 import FoodDetail from '../FoodDetail/FoodDetail';
 import Delivery from '../Delivery/Delivery';
 import CartItem from '../CartItem/CartItem';
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+import CheckoutForm from '../Payment/CheckoutForm';
+import Login from '../Login/Login';
+import { useAuth } from '../Login/useAuth';
 
 
 const FoodMenu = () => {
@@ -16,16 +20,41 @@ const FoodMenu = () => {
     const [checkedOut, setCheckedOut] = useState(false);
     const [deliveryInfoSubmit, setDeliveryInfoSubmit] = useState(false);
     const [deliveryInformation, setDeliveryInformation] = useState(null);
+    const [orderId, setOrderId] = useState(null);
+
+    const auth = useAuth();
+
+    const stripePromise = loadStripe('pk_test_Qxc5rcBn8snxoC7d0Xm7tlGi00eXYINh85');
 
     
 // load data
     useEffect(()=>{
-        setAllItems(fakeData);
-        handleSelection("Breakfast");
+        fetch('http://localhost:5000/foods')
+        .then(res => res.json())
+        .then(data => {
+            setAllItems(data)
+            const currentCart = JSON. parse(localStorage.getItem('foodCart') || "[]");
+            
+            if(currentCart) setCart(currentCart);
+
+             console.log(currentCart)
+           
+        })
+        
+        .catch(err => console.log(err));
+        
+        // if(allItems.length){
+            
+        // }
+        
     }, [])
 
+    useEffect(() => {
+        handleSelection("Breakfast");
+    }, [allItems])
+
     const handleSelection = category => {
-        const currentItems = fakeData.filter(food => food.category === category);
+        const currentItems = allItems.filter(food => food.category === category);
         setCurrentItems(currentItems);
         setCurrentSelectedItem(null);
     }
@@ -41,11 +70,18 @@ const FoodMenu = () => {
             const index = cart.indexOf(selectedItem);
             const newCart = [...cart];
             newCart[index] = item;
+            console.log(newCart)
+            localStorage.setItem('foodCart', JSON.stringify(newCart))
+
             setCart(newCart);
         }
         else{
+            console.log([...cart,item])
             setCart([...cart, item]);
+            localStorage.setItem('foodCart', JSON.stringify([...cart, item]));
         }
+
+        
     }
 
     const removeFromCart = item => {
@@ -55,6 +91,9 @@ const FoodMenu = () => {
     const handleCheckout = () =>{
         if(checkedOut) setCheckedOut(false);
         else setCheckedOut(true);
+
+        // const currentCart = localStorage.getItem('foodCart');
+        // if(currentCart) setCart([...currentCart]);
     }
 
     const handleDeliveryInfoSubmit = (deliveryInfo) =>{
@@ -65,9 +104,34 @@ const FoodMenu = () => {
         }
     }
 
-    const checkoutBtnMarkup = cart.length > 0 ? (
-                                    <Button onClick={()=>handleCheckout()}> Checkout Your Food </Button>
-                                ): <Button disabled> Checkout Your Food </Button>
+    const handlePlaceOrder = (payment) => {
+
+        const orderDetail = {
+            email: deliveryInformation.email,
+            cart: {cart},
+            shipment: deliveryInformation,
+            payment: payment
+        }
+
+        fetch('http://localhost:5000/placeOrder', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(orderDetail)
+        })
+        .then(res => res.json())
+        .then(order => {
+
+            setOrderId(order._id)
+            localStorage.removeItem('foodCart');
+            setCart(null);
+        })
+     }
+
+    // const checkoutBtnMarkup = (cart === null) ? (
+                                    
+    //                             ): 
     
     return (
         <div className="food-menu">
@@ -85,7 +149,7 @@ const FoodMenu = () => {
             </Nav>
             
             {
-                !checkedOut &&
+                !checkedOut && !orderId &&
             
                 <Container fluid="md">
                     <Row >
@@ -102,7 +166,13 @@ const FoodMenu = () => {
                         }
                     </Row>
                     
-                    { checkoutBtnMarkup }
+                        {
+                            cart.length>0 && <Button onClick={()=>handleCheckout()}> Checkout Your Food </Button>
+                        }
+                        {
+                            cart.length==0 && <Button disabled> Checkout Your Food </Button>
+                        }
+
                     
                 </Container>
             }
@@ -112,13 +182,20 @@ const FoodMenu = () => {
             
                 <Container fluid="md">
                     <Row >
-                        <Col md={6}>
-                            <Delivery deliveryInfoSubmit={handleDeliveryInfoSubmit}/>
+                        <Col md={12} style={{display: deliveryInfoSubmit? 'none' : 'block'}}>
+                            {
+                                auth.user &&
+                                <Delivery deliveryInfoSubmit={handleDeliveryInfoSubmit}/>
+                            }
+                            {
+                                !auth.user &&
+                                <Login path="/delivery"/>
+                            }
                         </Col>
-                        <Col md={6}>
+                        <Col md={12}  style={{display: deliveryInfoSubmit? 'block' : 'none'}}>
                             <h3>Cart</h3>
                             <hr/>
-                            { deliveryInfoSubmit &&
+                            { deliveryInfoSubmit &&  !orderId &&
                                 <div>
                                     <h4>From: KFC</h4>
                                     <h5>Arriving in: 20-30 min</h5>
@@ -127,11 +204,13 @@ const FoodMenu = () => {
                                     <h6>Mobile No.: {deliveryInformation.mobile}</h6>
                                     <hr/>
                                     <br/>
+
+                                    
                                 </div>
                                 
                             }
                             {
-                                cart.map(item => {
+                                cart && cart.map(item => {
 
                                     const singleItemPrice = allItems.find(i => i.id === item.id).price;                                    
                                     return <CartItem item={item} singlePrice={singleItemPrice}  addToCart={addToCart} removeFromCart={removeFromCart}/>
@@ -141,11 +220,18 @@ const FoodMenu = () => {
                             }
 
                             {
-                                deliveryInfoSubmit && <a href="/orderplaced" className="btn btn-outline-danger">Place Order</a>
+                                orderId && <Alert variant="success">
+                                    Thanks for your order! Your order id: {orderId} <br/>
+                                    Eat Healthy!!
+                                </Alert>
                             }
+
                             {
-                                !deliveryInfoSubmit && <Button disabled> Place Order </Button>
+                                deliveryInfoSubmit &&  !orderId && <Elements stripe={stripePromise}>
+                                    <CheckoutForm handlePlaceOrder={handlePlaceOrder} />
+                                </Elements>
                             }
+                            
 
                         
                         </Col>

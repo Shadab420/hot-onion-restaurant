@@ -37,9 +37,9 @@ function App() {
           <Route path="/signup">
             <Signup />
           </Route>
-          <Route path="/delivery">
+          <PrivateRoute path="/delivery">
             <Delivery />
-          </Route>
+          </PrivateRoute>
           <PrivateRoute path="/orderplaced">
             <PlaceOrder />
           </PrivateRoute>
